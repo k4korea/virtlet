@@ -82,8 +82,8 @@ jobs:
         with:
 #          username: ${{ secrets.DOCKERHUB_USERNAME }}
 #          password: ${{ secrets.DOCKERHUB_TOKEN }}
-          username: ${ DOCKER_USER }
-          password: ${ DOCKER_PASSWORD }
+          username: "love7310@naver.com" # ${ DOCKER_USER }
+          password: "rlawnsdud#08" # ${ DOCKER_PASSWORD }
 
 
       -
