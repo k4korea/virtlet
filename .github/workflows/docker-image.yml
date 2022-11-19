@@ -47,9 +47,12 @@ jobs:
       - name: Build the Docker image
         env: 
           DOCKER_TAG: "7"           
-          DOCKER_USER: ${{ secrets.DOCKER_USER }}
+          #! DOCKER_USER: ${{ secrets.DOCKER_USER }}
+          #! DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+          #! DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          DOCKER_USER: "love7310@naver.com"
           DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
-          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          DOCKER_PASSWORD: "rlawnsdud#08"
         run: >-          
           echo "docker_tag=work-11" >> $GITHUB_ENV \
           docker build . --file Dockerfile --tag virtlet:${DOCKER_TAG} \
