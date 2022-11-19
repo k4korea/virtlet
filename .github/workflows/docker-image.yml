@@ -29,14 +29,15 @@ jobs:
       - run: npm test    
 
       - name: Build the Docker image
-        run: |
+        run: >-
           echo "{docker_tag}=${(date +%s)}" >> $GITHUB_ENV \
-
+          docker build . --file Dockerfile --tag virtlet:${{env.docker_tag}} \
+ 
+ 
 #          echo "{environment_variable_name}={value}" >> $GITHUB_ENV
 #          echo "{}={}"  
 #          echo "Adding some Markdown content" >> $GITHUB_STEP_SUMMARY
-          docker build . --file Dockerfile --tag virtlet:${{env.docker_tag}} \
- 
+
       
       #! - name: Log in to Docker Hub
       #!   uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
