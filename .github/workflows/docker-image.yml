@@ -34,7 +34,7 @@ jobs:
           echo "docker_tag2=work-11" >> $GITHUB_ENV \
           docker build . --file Dockerfile --tag virtlet:${{env.docker_tag2}} \
           echo "environment_variable_name=${{env.docker_tag}}" >> $GITHUB_ENV 
-          echo "environment_name=${{env.docker_tag}}" 
+          echo "environment_name=${{env.docker_tag2}}" 
           echo "environment_variable=${{env}}" 
           echo "environment_variable=$env" 
 
