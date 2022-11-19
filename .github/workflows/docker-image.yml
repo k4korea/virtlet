@@ -40,8 +40,8 @@ jobs:
 #          echo "Adding some Markdown content" >> $GITHUB_STEP_SUMMARY
 
       - name: Login to Docker Hub
-        run : echo  ${{ secrets.DOCKERHUB_USERNAME }} 
-        run : echo  ${{env.docker_tag}} 
+        run: echo  ${{ secrets.DOCKERHUB_USERNAME }} 
+        run: echo  ${{env.docker_tag}} 
 
       #! -
       #!   name: Login to Docker Hub
