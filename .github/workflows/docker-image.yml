@@ -76,23 +76,23 @@ jobs:
 
 
 
-      -
-        name: Login to Docker Hub
-        uses: docker/login-action@v2
-        with:
-#          username: ${{ secrets.DOCKERHUB_USERNAME }}
-#          password: ${{ secrets.DOCKERHUB_TOKEN }}
-          username: "love7310@naver.com" # ${ DOCKER_USER }
-          password: "dckr_pat_vBAeozyHjqkHF4hRVA-R6FSH3gA" #"rlawnsdud#08" # ${ DOCKER_PASSWORD }
+#!       -
+#!         name: Login to Docker Hub
+#!         uses: docker/login-action@v2
+#!         with:
+#! #          username: ${{ secrets.DOCKERHUB_USERNAME }}
+#! #          password: ${{ secrets.DOCKERHUB_TOKEN }}
+#!           username: "love7310@naver.com" # ${ DOCKER_USER }
+#!           password: "dckr_pat_vBAeozyHjqkHF4hRVA-R6FSH3gA" #"rlawnsdud#08" # ${ DOCKER_PASSWORD }
 
 
-      -
-        name: Build and push
-        uses: docker/build-push-action@v3
-        with:
-          push: true
-#          tags: love7310/virtlet:${{ steps.meta.outputs.tags }}
-          tags: love7310/virtlet:${DOCKER_TAG}
+#!       -
+#!         name: Build and push
+#!         uses: docker/build-push-action@v3
+#!         with:
+#!           push: true
+#! #          tags: love7310/virtlet:${{ steps.meta.outputs.tags }}
+#!           tags: love7310/virtlet:${DOCKER_TAG}
 
 
 
