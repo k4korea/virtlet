@@ -125,7 +125,7 @@ jobs:
         with:
           #username: ${{ secrets.DOCKER_USER }}
           #password: ${{ secrets.DOCKER_PASSWORD }}
-          username: "love7310"
+          username: echo $DOCKER_USER  # "love7310"
           password: "rlawnsdud#08"
       
       - name: Extract metadata (tags, labels) for Docker
