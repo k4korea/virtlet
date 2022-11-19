@@ -152,7 +152,8 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ steps.vars_output.outputs.git_hash }}
+          #tags: ${{ steps.vars_output.outputs.git_hash }}
+          tags: ${{ env.git_hash }}
           labels: ${{ steps.meta.outputs.labels }}        
 
       
