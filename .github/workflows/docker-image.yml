@@ -45,8 +45,7 @@ jobs:
           echo ${{ steps.vars.outputs.tags }}
 
       - name: Build the Docker image
-        run: >-
-          
+        run: >-          
           echo "docker_tag=work-11" >> $GITHUB_ENV \
           docker build . --file Dockerfile --tag virtlet::${{env.docker_tag2}} \
           
