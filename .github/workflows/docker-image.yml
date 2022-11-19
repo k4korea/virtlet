@@ -42,16 +42,16 @@ jobs:
         run: |
           echo $RELEASE_VERSION
           echo $RELEASE_VERSION2
-          echo ${{ steps.vars.outputs.tags }}
+#          echo ${{ steps.vars.outputs.tags }}
 
       - name: Build the Docker image
         run: >-          
           echo "docker_tag=work-11" >> $GITHUB_ENV \
           docker build . --file Dockerfile --tag virtlet::${{env.docker_tag2}} \
-          
+          echo "environment_variable=$env" 
           
 #          echo "environment_variable=${{env}}" 
-          echo "environment_variable=$env" 
+          
 
 #          echo "{docker_tag}=${(date +%s)}" >> $GITHUB_ENV \ 
 # ${{ steps.vars.outputs.tag }} 
