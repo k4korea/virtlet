@@ -60,8 +60,8 @@ jobs:
           
 
       - name: Login to Docker Hub
-        run: echo The username ${ DOCKER_USER }
-      - run: echo secret- ${ DOCKER_PASSWORD }          
+        run: echo The username ${DOCKER_USER}
+      - run: echo secret- ${DOCKER_PASSWORD}          
 
 #          echo "{docker_tag}=${(date +%s)}" >> $GITHUB_ENV \ 
 # ${{ steps.vars.outputs.tag }} 
