@@ -46,7 +46,6 @@ jobs:
           echo $TAG_VERSION
           echo $(TAG_VERSION)
           echo ${{ env.TAG_VERSION}}
-
           echo $(TAG_VERSION)
           echo ${{ steps.vars_output.outputs.git_hash }}
           echo ${{ steps.vars_output.outputs.git_branch }}
