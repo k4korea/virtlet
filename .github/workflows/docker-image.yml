@@ -45,12 +45,16 @@ jobs:
 #          echo ${{ steps.vars.outputs.tags }}
 
       - name: Build the Docker image
+        env: 
+          DOCKER_TAG: "7"           
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+          DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_USERNAME }}
         run: >-          
           echo "docker_tag=work-11" >> $GITHUB_ENV \
-          docker build . --file Dockerfile --tag virtlet::${{env.docker_tag}} \
-          echo "environment_variable=$env" 
+          docker build . --file Dockerfile --tag virtlet:${DOCKER_TAG} \
+#          echo "environment_variable=$env" 
           
-#          echo "environment_variable=${{env}}" 
+
           
 
 #          echo "{docker_tag}=${(date +%s)}" >> $GITHUB_ENV \ 
@@ -60,43 +64,50 @@ jobs:
 #          echo "Adding some Markdown content" >> $GITHUB_STEP_SUMMARY
 
 
-      - name: Set the value
-        id: step_one
-        run: |
-          echo "action_state=yellow" >> $GITHUB_ENV
 
-      - name: Use the value
-        id: step_two
-        env: 
-          DOCKER_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+      -
+        name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+#          username: ${{ secrets.DOCKERHUB_USERNAME }}
+#          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          username: ${ DOCKERHUB_USERNAME }
+          password: ${ DOCKERHUB_TOKEN }
 
-        run: |
-          echo "${{ env.action_state }}" # This will output 'yellow'
 
-      - name: Login to Docker Hub
-        run: echo The username is ${{ inputs.username }}
-      - run: echo secret- ${{ secrets.DOCKERHUB_USERNAME }}
-      - run: echo secret2- {$DOCKERHUB_USERNAME }}
-      - run: echo dockertag ${{env.docker_tag}} 
-      - run: echo dockertag2 ${{env.docker_tag2}} 
-      - run: echo tag ${{ steps.vars.outputs.tags }}
-      - run: echo tag-label ${{ steps.vars.outputs.tags }}
+      -
+        name: Build and push
+        uses: docker/build-push-action@v3
+        with:
+          push: true
+#          tags: love7310/virtlet:${{ steps.meta.outputs.tags }}
+          tags: love7310/virtlet:${DOCKER_TAG}
 
-      #! -
-      #!   name: Login to Docker Hub
-      #!   uses: docker/login-action@v2
-      #!   with:
-      #!     username: ${{ secrets.DOCKERHUB_USERNAME }}
-      #!     password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      #! -
-      #!   name: Build and push
-      #!   uses: docker/build-push-action@v3
-      #!   with:
-      #!     push: true
-      #!     tags: love7310/virtlet:${{ steps.meta.outputs.tags }}
-      #!     tags: love7310/virtlet:${{env.docker_tag}}
-      
+
+
+
+      #! - name: Set the value
+      #!   id: step_one
+      #!   run: |
+      #!     echo "action_state=yellow" >> $GITHUB_ENV
+
+      #! - name: Use the value
+      #!   id: step_two
+      #!   env: 
+      #!     DOCKER_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+
+      #!   run: |
+      #!     echo "${{ env.action_state }}" # This will output 'yellow'
+
+      #! - name: Login to Docker Hub
+      #!   run: echo The username is ${{ inputs.username }}
+      #! - run: echo secret- ${{ secrets.DOCKERHUB_USERNAME }}
+      #! - run: echo secret2- {$DOCKERHUB_USERNAME }}
+      #! - run: echo dockertag ${{env.docker_tag}} 
+      #! - run: echo dockertag2 ${{env.docker_tag2}} 
+      #! - run: echo tag ${{ steps.vars.outputs.tags }}
+      #! - run: echo tag-label ${{ steps.vars.outputs.tags }}
       
       #! - name: Log in to Docker Hub
       #!   uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
