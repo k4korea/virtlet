@@ -29,7 +29,7 @@ jobs:
       - run: npm test    
 
       - name: Build the Docker image
-      - run: |
+        run: |
           echo "{docker_tag}=${(date +%s)}" >> $GITHUB_ENV \
 
 #          echo "{environment_variable_name}={value}" >> $GITHUB_ENV
