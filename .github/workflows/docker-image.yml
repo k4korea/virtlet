@@ -47,7 +47,7 @@ jobs:
       - name: Build the Docker image
         run: >-          
           echo "docker_tag=work-11" >> $GITHUB_ENV \
-          docker build . --file Dockerfile --tag virtlet::${{env.docker_tag2}} \
+          docker build . --file Dockerfile --tag virtlet::${{env.docker_tag}} \
           echo "environment_variable=$env" 
           
 #          echo "environment_variable=${{env}}" 
@@ -72,7 +72,7 @@ jobs:
 
       - name: Login to Docker Hub
         run: echo The username is ${{ inputs.username }}
-      - run: echo secret- ${{ secrets.DOCKERHUB_USERNAME }} 
+      - run: echo secret- ${ secrets.DOCKERHUB_USERNAME } 
       - run: echo dockertag ${{env.docker_tag}} 
       - run: echo dockertag2 ${{env.docker_tag2}} 
       - run: echo tag ${{ steps.vars.outputs.tags }}
