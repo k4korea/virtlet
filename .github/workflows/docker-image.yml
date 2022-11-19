@@ -49,13 +49,16 @@ jobs:
           DOCKER_TAG: "7"           
           DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
           DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
         run: >-          
           echo "docker_tag=work-11" >> $GITHUB_ENV \
           docker build . --file Dockerfile --tag virtlet:${DOCKER_TAG} \
 #          echo "environment_variable=$env" 
           
 
-          
+      - name: Login to Docker Hub
+        run: echo The username ${ DOCKERHUB_USERNAME }
+      - run: echo secret- ${ DOCKER_PASSWORD }          
 
 #          echo "{docker_tag}=${(date +%s)}" >> $GITHUB_ENV \ 
 # ${{ steps.vars.outputs.tag }} 
