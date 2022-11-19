@@ -62,7 +62,7 @@ jobs:
       - name: Login to Docker Hub
         run: echo The username ${DOCKER_USER}
       - name: Login to Docker password
-        run: echo  $(DOCKER_PASSWORD)
+        run: echo  $DOCKER_PASSWORD
       - name: Login to Docker user
         run: echo  $DOCKER_USER
       - name: Login to Docker password2
@@ -125,7 +125,7 @@ jobs:
         with:
           #username: ${{ secrets.DOCKER_USER }}
           #password: ${{ secrets.DOCKER_PASSWORD }}
-          username: ${DOCKER_USER}  # "love7310"    x:  ${{ DOCKER_USER }}
+          username: $DOCKER_USER  # "love7310"    x:  ${{ DOCKER_USER }}  x: ${DOCKER_USER}
           password: "rlawnsdud#08"
       
       - name: Extract metadata (tags, labels) for Docker
