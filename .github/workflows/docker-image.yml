@@ -64,8 +64,10 @@ jobs:
           DOCKER_PASSWORD: "rlawnsdud#08"
         run: >-          
           echo "docker_tag=work-11" >> $GITHUB_ENV \
-#          docker build . --file Dockerfile --tag virtlet:${DOCKER_TAG} \
-          docker build . --file Dockerfile --tag virtlet:${TAG_VERSION} \
+          docker build . --file Dockerfile --tag virtlet:${DOCKER_TAG} \
+
+
+#          docker build . --file Dockerfile --tag virtlet:${TAG_VERSION} \
 #          docker build . --file Dockerfile --tag virtlet:${{ env.TAG_VERSION}} \          
 
           
