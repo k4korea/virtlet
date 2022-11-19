@@ -32,16 +32,22 @@ jobs:
       - name: Set output
         id: vars
         run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
+      - name: Set output2
+        id: vars2
+        run: echo ::set-output name=tag::${GITHUB_REF#refs/heads/}        
       - name: set env
         run: echo "RELEASE_VERSION2=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
 
       - name: Check output
         env:
           RELEASE_VERSION: ${{ steps.vars.outputs.tags}}
+          TAG_VERSION: ${{ steps.vars2.outputs.tags}}
+
         
         run: |
           echo $RELEASE_VERSION
           echo $RELEASE_VERSION2
+          echo $TAG_VERSION
 #          echo ${{ steps.vars.outputs.tags }}
 
       - name: Build the Docker image
