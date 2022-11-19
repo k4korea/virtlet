@@ -47,8 +47,8 @@ jobs:
       - name: Build the Docker image
         env: 
           DOCKER_TAG: "7"           
-          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-          DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_USERNAME }}
+          DOCKER_USER: ${{ secrets.DOCKER_USER }}
+          DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
         run: >-          
           echo "docker_tag=work-11" >> $GITHUB_ENV \
@@ -74,7 +74,7 @@ jobs:
         with:
 #          username: ${{ secrets.DOCKERHUB_USERNAME }}
 #          password: ${{ secrets.DOCKERHUB_TOKEN }}
-          username: ${ DOCKERHUB_USERNAME }
+          username: ${ DOCKER_USER }
           password: ${ DOCKERHUB_TOKEN }
 
 
