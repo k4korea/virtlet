@@ -40,6 +40,14 @@ jobs:
         env:
           TAG_VERSION:  ${{ steps.vars_output.outputs.git_hash}}
           BRANCH:       ${{ steps.vars_output.outputs.git_branch}}
+        run: >-
+          echo $git_hash
+          echo $(git_has)
+          echo $TAG_VERSION
+          echo $(TAG_VERSION)
+          echo ${{ env.TAG_VERSION}}
+          echo ${ TAG_VERSION }
+          echo $(TAG_VERSION)
           
           
 
