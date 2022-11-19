@@ -28,14 +28,14 @@ jobs:
       - run: npm run build --if-present
       - run: npm test    
 
-#      - name: Build the Docker image
+      - name: Build the Docker image
       - run: |
-          echo "{docker_tag}=${(date +%s)}" >> $GITHUB_ENV
+          echo "{docker_tag}=${(date +%s)}" >> $GITHUB_ENV \
 
 #          echo "{environment_variable_name}={value}" >> $GITHUB_ENV
 #          echo "{}={}"  
 #          echo "Adding some Markdown content" >> $GITHUB_STEP_SUMMARY
-          docker build . --file Dockerfile --tag virtlet:${{env.docker_tag}}
+          docker build . --file Dockerfile --tag virtlet:${{env.docker_tag}} \
  
       
       #! - name: Log in to Docker Hub
