@@ -61,7 +61,7 @@ jobs:
 
       - name: Login to Docker Hub
         run: echo The username ${DOCKER_USER}
-      - run: echo secret- ${DOCKER_PASSWORD}
+      - run: echo secret- $(DOCKER_PASSWORD)
       - run: echo username- $DOCKER_USER
       - run: echo userpwd - $DOCKER_PASSWORD
 
