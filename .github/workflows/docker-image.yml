@@ -66,7 +66,7 @@ jobs:
       - name: Login to Docker user
         run: echo  $DOCKER_USER
       - name: Login to Docker password2
-      - run: echo $DOCKER_PASSWORD
+        run: echo $DOCKER_PASSWORD
 
 #          echo "{docker_tag}=${(date +%s)}" >> $GITHUB_ENV \ 
 # ${{ steps.vars.outputs.tag }} 
