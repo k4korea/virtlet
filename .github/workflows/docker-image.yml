@@ -43,7 +43,10 @@ jobs:
       - name: get_output
         run: >-
           echo ${{ steps.var_test.outputs.set_docker_tag }}
-          echo ${{ steps.var_test.outputs.set_echo_docker_tag }}
+          
+
+      - name: get_output2
+        run: echo ${{ steps.var_test.outputs.set_docker_tag }}          
 
       - id: set-foo
         run: echo "::set-output name=foo::bar"
