@@ -93,7 +93,9 @@ jobs:
           echo "$GITLAB_SSH_PRIVATE_KEY"
           echo "$GITLAB_SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-          sed -i 's/root@su.cluster.local/ /g' ~/.ssh/id_rsa
+          str1=$(cat /etc/hostname)
+          ssh-keygen -R $str1
+#          sed -i 's/root@su.cluster.local/ /g' ~/.ssh/id_rsa
           cat /etc/hostname
           id
           cat ~/.ssh/id_rsa
