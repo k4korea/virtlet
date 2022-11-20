@@ -124,7 +124,7 @@ jobs:
          ls -al service/virtlet/dev/*
          cd ./service/virtlet/dev/
          ls -al
-         cat ./values.yaml
+         cat ./service/virtlet/dev/values.yaml
         
       - name: helm repository
         run: ls
