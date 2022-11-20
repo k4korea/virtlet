@@ -78,24 +78,43 @@ jobs:
       #!   id: docker-push
       #!   run: docker push love7310/virtlet:${{ env.git_hash }}
 
+
   to_gitlab:
     runs-on: ubuntu-latest
-    steps:                                              # <-- must use actions/checkout before mirroring!
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-      - name: gitlab connection
-        env: 
-          GITLAB_SSH_PRIVATE_KEY: ${{ secrets.GITLAB_SSH_PRIVATE_KEY }}
-        run: |          
-          mkdir -p ~/.ssh
-          echo "$GITLAB_SSH_PRIVATE_KEY"          
-          echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDg5rpdUHFFO8i4vTI9iLPIdz+RSW4RNjAlAzb2DIaRFBOKdFsARopSS+L4TUVPjRhh5tqzPNo7UCFs1RSCQsDyvE8u1bJuu229iCbfFEplapoIw1r9vH5NYEjBerIJiLZj8bW5+7b0soYvNiIYpaAhlwSscRDFIYrkUDstgY9b1nQeRbrHjJ8YgVeDUK6yz56YOKRm1/WzAjfpJCyWjF2TW9qDGpoMFqNlzl04YnE5p/Kp/DC3JSaZDNtCAmxNAYQK8NxOPvYWPQzCaER3cd2T5lGBUJJSTMbI83eaOsqQRVfEHoYpiLkLOmvH4m1P3d9AfgzbU1xpGllcjpsgg9/H root@su.cluster.local" > ~/.ssh/id_rsa
-          echo "gitlab.aiops-mz.com,13.215.1.33 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBNdTXTaRfrTL5Yqmf5bu2yxJ/WDhK1Bky/uoVXBa7jWO8dxHaiftwXVeN/Qk90lVXlrmfpNWe+SGge8JU01vj3s=" > ~/.ssh/known_hosts
-          chmod 600 ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/known_hosts
-          ls ~/.ssh/*
-          sudo ssh -T git@gitlab.aiops-mz.com
+      steps:     
+        - name: helm repository                                         # <-- must use actions/checkout before mirroring!
+          uses: actions/checkout@v3
+           with: 
+            repository: k4korea/su-argo
+            path: ./service/dev/values.yaml
+        
+        - name: helm repository
+          run: ls
+
+
+
+
+
+  
+
+  #! to_gitlab:
+  #!   runs-on: ubuntu-latest
+  #!   steps:                                              # <-- must use actions/checkout before mirroring!
+  #!     - uses: actions/checkout@v3
+  #!       with:
+  #!         fetch-depth: 0
+  #!     - name: gitlab connection
+  #!       env: 
+  #!         GITLAB_SSH_PRIVATE_KEY: ${{ secrets.GITLAB_SSH_PRIVATE_KEY }}
+  #!       run: |          
+  #!         mkdir -p ~/.ssh
+  #!         echo "$GITLAB_SSH_PRIVATE_KEY"          
+  #!         echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDg5rpdUHFFO8i4vTI9iLPIdz+RSW4RNjAlAzb2DIaRFBOKdFsARopSS+L4TUVPjRhh5tqzPNo7UCFs1RSCQsDyvE8u1bJuu229iCbfFEplapoIw1r9vH5NYEjBerIJiLZj8bW5+7b0soYvNiIYpaAhlwSscRDFIYrkUDstgY9b1nQeRbrHjJ8YgVeDUK6yz56YOKRm1/WzAjfpJCyWjF2TW9qDGpoMFqNlzl04YnE5p/Kp/DC3JSaZDNtCAmxNAYQK8NxOPvYWPQzCaER3cd2T5lGBUJJSTMbI83eaOsqQRVfEHoYpiLkLOmvH4m1P3d9AfgzbU1xpGllcjpsgg9/H root@su.cluster.local" > ~/.ssh/id_rsa
+  #!         echo "gitlab.aiops-mz.com,13.215.1.33 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBNdTXTaRfrTL5Yqmf5bu2yxJ/WDhK1Bky/uoVXBa7jWO8dxHaiftwXVeN/Qk90lVXlrmfpNWe+SGge8JU01vj3s=" > ~/.ssh/known_hosts
+  #!         chmod 600 ~/.ssh/id_rsa
+  #!         chmod 600 ~/.ssh/known_hosts
+  #!         ls ~/.ssh/*
+  #!         sudo ssh -T git@gitlab.aiops-mz.com
 
 
 #echo "$GITLAB_SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
@@ -115,21 +134,21 @@ jobs:
 #!           ssh_private_key: ${{ secrets.GITLAB_SSH_PRIVATE_KEY }}
 #!           ssh_username: ${{ secrets.CODECOMMIT_SSH_PRIVATE_KEY_ID }}
 
-  to_codecommit:                                        # <-- different jobs are executed in parallel.
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-      - uses: pixta-dev/repository-mirroring-action@v1
-        with:
-          target_repo_url: ssh://skycloud@megazone.com@gitlab.aiops-mz.com:su/su-project.git
-#            #ssh://git-codecommit.<somewhere>.amazonaws.com/v1/repos/<target_repository_name>
+#!   to_codecommit:                                        # <-- different jobs are executed in parallel.
+#!     runs-on: ubuntu-latest
+#!     steps:
+#!       - uses: actions/checkout@v3
+#!         with:
+#!           fetch-depth: 0
+#!       - uses: pixta-dev/repository-mirroring-action@v1
+#!         with:
+#!           target_repo_url: ssh://skycloud@megazone.com@gitlab.aiops-mz.com:su/su-project.git
+#! #            #ssh://git-codecommit.<somewhere>.amazonaws.com/v1/repos/<target_repository_name>
         
-          ssh_private_key:
-            ${{ secrets.CODECOMMIT_SSH_PRIVATE_KEY }}
-          ssh_username: ${{ secrets.CODECOMMIT_SSH_PRIVATE_KEY_ID }}
-                           # <-- (for codecommit) you need to specify ssh-key-id as ssh username.            
+#!           ssh_private_key:
+#!             ${{ secrets.CODECOMMIT_SSH_PRIVATE_KEY }}
+#!           ssh_username: ${{ secrets.CODECOMMIT_SSH_PRIVATE_KEY_ID }}
+#!                            # <-- (for codecommit) you need to specify ssh-key-id as ssh username.            
 
 
       - name: helm git ls
