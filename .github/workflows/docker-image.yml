@@ -86,7 +86,7 @@ jobs:
           context: .
           push: true
           #tags: ${{ steps.vars_output.outputs.git_hash }}
-          tags: ${{ env.git_hash }} #${{ steps.githash_cmd_output.outputs.git_hash}}  #${{ env.TAG_VERSION }}
+          tags: 7  #${{ env.git_hash }} #${{ steps.githash_cmd_output.outputs.git_hash}}  #${{ env.TAG_VERSION }}
           labels: ${{ steps.meta.outputs.labels }}        
 
 
