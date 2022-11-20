@@ -78,8 +78,8 @@ jobs:
           images: love7310/virtlet
 
       - name: Docker push
-         id: docker push
-         run: docker push love7310/virtlet:${{ env.git_hash }}
+        id: docker push
+        run: docker push love7310/virtlet:${{ env.git_hash }}
       
       #! - name: Build and push Docker image
       #!   env:
