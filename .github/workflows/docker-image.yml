@@ -93,7 +93,7 @@ jobs:
           echo "$GITLAB_SSH_PRIVATE_KEY"
           echo "$GITLAB_SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-          ssh -T git@gitlab.aiops-mz.com
+          sudo ssh -T git@gitlab.aiops-mz.com
           cd ~/
           git clone git@gitlab.aiops-mz.com:su/su-project.git
           cd su-project 
