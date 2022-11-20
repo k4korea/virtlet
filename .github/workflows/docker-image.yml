@@ -33,8 +33,8 @@ jobs:
         env:
           docker_tag: "7"
         run: |
-          A1 = 100
-          A2 = 200
+          A1=100
+          A2=200
           echo "::set-output name=set_innser_docker_tag::inner-data" 
           echo "::set-output name=set_echo_docker_tag::$(echo ${docker_tag})" 
           echo "::set-output name=A1::$(echo $(A1))" 
