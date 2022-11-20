@@ -62,8 +62,8 @@ jobs:
       - name: get_output3
         run: echo ${{ steps.var_test.outputs.set_innser_docker_tag }}          
 
-      - name: get_output4
-        run: echo json(${{ steps.var_test.outputs }})
+      #! - name: get_output4
+      #!   run: echo json(${{ steps.var_test.outputs }})
 
       - name: get_output_A1
         run: echo json(${{ steps.var_test.outputs.A1 }})
