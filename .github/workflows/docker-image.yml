@@ -92,8 +92,8 @@ jobs:
       - name: git hand
         run: |
           mkdir -p ~/.ssh
-          echo "$GITLAB_SSH_PRIVATE_KEY"          
-          echo "${{ secrets.HELM_PRIVATE_SSH_KEY }}" > ~/.ssh/id_rsa
+          echo "$GHUB_PRIVATE_SSH_KEY"          
+          echo "${{ secrets.GHUB_PRIVATE_SSH_KEY }}" > ~/.ssh/id_rsa
 
           chmod 600 ~/.ssh/id_rsa
           ls ~/.ssh/*
@@ -115,7 +115,7 @@ jobs:
       #!     repository: k4korea/su-argo
       #!     path: service/virtlet/dev/values.yaml
       #!     ref: main
-      #!     ssh-key: ${{ secrets.HELM_PRIVATE_SSH_KEY }}
+      #!     ssh-key: ${{ secrets.GHUB_PRIVATE_SSH_KEY }}
       #!     persist-credentials: false
       #!     submodules: true
       #!     github-server-url: 'https://github.com/k4korea/su-argo.git'
