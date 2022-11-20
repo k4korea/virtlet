@@ -89,15 +89,15 @@ jobs:
 #      - run: git branch -l
 #      - run: git remote -v
 
-      - name: git hand
-        run: |
-          mkdir -p ~/.ssh
-          echo "$GHUB_PRIVATE_SSH_KEY"          
-          echo "${{ secrets.GHUB_PRIVATE_SSH_KEY }}" > ~/.ssh/id_rsa
+      #! - name: git hand
+      #!   run: |
+      #!     mkdir -p ~/.ssh
+      #!     echo "$GHUB_PRIVATE_SSH_KEY"          
+      #!     echo "${{ secrets.GHUB_PRIVATE_SSH_KEY }}" > ~/.ssh/id_rsa
 
-          chmod 600 ~/.ssh/id_rsa
-          ls ~/.ssh/*
-          sudo ssh -T git@github.com
+      #!     chmod 600 ~/.ssh/id_rsa
+      #!     ls ~/.ssh/*
+      #!     sudo ssh -T git@github.com
 
 #          echo "gitlab.aiops-mz.com,13.215.1.33 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBNdTXTaRfrTL5Yqmf5bu2yxJ/WDhK1Bky/uoVXBa7jWO8dxHaiftwXVeN/Qk90lVXlrmfpNWe+SGge8JU01vj3s=" > ~/.ssh/known_hosts
 #          chmod 600 ~/.ssh/known_hosts
@@ -109,16 +109,16 @@ jobs:
 #          sed -i 's/root@su.cluster.local/ /g' ~/.ssh/id_rsa
 #          sudo ssh -T git@gitlab.aiops-mz.com
 
-      #! - name: helm repository image update
-      #!   uses: actions/checkout@v3
-      #!   with: 
-      #!     repository: k4korea/su-argo
-      #!     path: service/virtlet/dev/values.yaml
-      #!     ref: main
-      #!     ssh-key: ${{ secrets.GHUB_PRIVATE_SSH_KEY }}
-      #!     persist-credentials: false
-      #!     submodules: true
-      #!     github-server-url: 'https://github.com/k4korea/su-argo.git'
+      - name: helm repository image update
+        uses: actions/checkout@v3
+        with: 
+          repository: k4korea/su-argo
+          path: service/virtlet/dev/values.yaml
+          ref: main
+          ssh-key: ${{ secrets.GHUB_PRIVATE_SSH_KEY }}
+          persist-credentials: false
+          submodules: true
+          github-server-url: 'https://github.com/k4korea/su-argo.git'
 
       - run: ls -al
       - run: cat .github/workflows/checkout.yml
