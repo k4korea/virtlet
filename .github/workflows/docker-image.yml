@@ -120,8 +120,10 @@ jobs:
           submodules: true
           github-server-url: 'https://github.com/k4korea/su-argo.git'
 
-      - run: ls -al
-      - run: cat .github/workflows/checkout.yml
+      - run: |
+         ls -al service/virtlet/dev/*
+         cat service/virtlet/dev/values.yaml
+        
         
       - name: helm repository
         run: ls
