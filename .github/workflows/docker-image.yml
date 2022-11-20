@@ -28,50 +28,111 @@ jobs:
       - run: npm run build --if-present
       - run: npm test   
 
-      - name: variable test
-        id : var_test
-        env:
-          docker_tag: "7"
-        run: |
-          A1="100"
-          A2=200
-          echo $(A1)
-          echo "::set-output name=A1::$(echo $(A1))" 
-#          echo "::set-output name=A2::$(echo $(A2))" 
-#          echo "::set-output name=set_innser_docker_tag::inner-data" 
-#          echo "::set-output name=set_echo_docker_tag::$(echo ${docker_tag})" 
 
-
-
-
-#          echo ${{ env.docker_tag }}  # FAIL 7
-#          echo "::set-output name=set_docker_tag::${docker_tag}"  안됨
-
-
-
-#          ## env 에다 변수를 넣어야 하나.
-#          echo $docker_tag  # OK 7          
-        
-      - name: get_output
+      - name: Set Output git hash
+        id: githash_env_output
         run: >-
-          echo ${{ steps.var_test.outputs.set_docker_tag }}
+          echo git_hash=$(git rev-parse --short "$GITHUB_SHA") >> $GITHUB_ENV
+
+      - name: Set Output git hash2
+        id: githash_cmd_output
+        run: >-
+          echo git_hash=$(git rev-parse --short "$GITHUB_SHA")
+
+      - name: Set Output git branch
+        id: gitbranch_env_output
+        run: >-
+          echo  git_branch=${GITHUB_REF#refs/heads/} >> $GITHUB_ENV    
+
+      - name: Set Output git branch
+        id: gitbranch_cmd_output
+        run: >-
+          echo  git_branch=${GITHUB_REF#refs/heads/} 
+
+
+      - name: Build the Docker image
+        env: 
+          #DOCKER_TAG: "7"           
+          TAG_VERSION:  ${{ steps.githash_env_output.outputs.git_hash}}
+          #! DOCKER_USER: ${{ secrets.DOCKER_USER }}
+          #! DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+          #! DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          DOCKER_USER: "love7310"  #"love7310@naver.com"
+          DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+          DOCKER_PASSWORD: "rlawnsdud#08"
+        run: >-          
+          docker build . --file Dockerfile --tag virtlet:${{ env.TAG_VERSION }} 
+
+
+        - name: Log in to Docker Hub
+        uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
+        env:
+          DOCKER_USER: ${{ secrets.DOCKER_USER }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        with:
+          username: "love7310" #${{ env.DOCKER_USER }}
+          #password: ${{ secrets.DOCKER_PASSWORD }}
+          #username: $DOCKER_USER  # "love7310"    x:  ${{ DOCKER_USER }}  x: ${DOCKER_USER} x: $DOCKER_USER
+          password: "rlawnsdud#08"
+      
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
+        with:
+          images: love7310/virtlet
+      
+      - name: Build and push Docker image
+        env:
+          TAG_VERSION:  ${{ steps.githash_cmd_output.outputs.git_hash}}
+          BRANCH:       ${{ steps.vars_output.outputs.git_branch}}
+        uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
+        with:
+          context: .
+          push: true
+          #tags: ${{ steps.vars_output.outputs.git_hash }}
+          tags: ${{ env.TAG_VERSION }}
+          labels: ${{ steps.meta.outputs.labels }}        
+
+
+
+#!       #  결론은 한개만 된다 output 
+#!       - name: variable test
+#!         id : var_test
+#!         env:
+#!           docker_tag: "7"
+#!         run: |
+#!           A1="100"
+#!           A2=200
+#!           echo $(A1)
+#!           echo "::set-output name=A1::$(echo $(A1))" 
+#! #          echo "::set-output name=A2::$(echo $(A2))" 
+#! #          echo "::set-output name=set_innser_docker_tag::inner-data" 
+#! #          echo "::set-output name=set_echo_docker_tag::$(echo ${docker_tag})" 
+#! #          echo ${{ env.docker_tag }}  # FAIL 7
+#! #          echo "::set-output name=set_docker_tag::${docker_tag}"  안됨
+#! #          ## env 에다 변수를 넣어야 하나.
+#! #          echo $docker_tag  # OK 7          
+        
+#!       - name: get_output
+#!         run: >-
+#!           echo ${{ steps.var_test.outputs.set_docker_tag }}
           
 
-      - name: get_output2
-        run: echo ${{ steps.var_test.outputs.set_echo_docker_tag }}          
+#!       - name: get_output2
+#!         run: echo ${{ steps.var_test.outputs.set_echo_docker_tag }}          
       
-      - name: get_output3
-        run: echo ${{ steps.var_test.outputs.set_innser_docker_tag }}          
+#!       - name: get_output3
+#!         run: echo ${{ steps.var_test.outputs.set_innser_docker_tag }}          
 
-      #! - name: get_output4
-      #!   run: echo json(${{ steps.var_test.outputs }})
+#!       #! - name: get_output4
+#!       #!   run: echo toJson(${{ steps.var_test.outputs }})  #jsong -> toJson
 
-      - name: get_output_A1
-        run: echo ${{ steps.var_test.outputs.A1 }}
-      - name: get_output_A2
-        run: echo ${{ steps.var_test.outputs.A2 }}
+#!       - name: get_output_A1
+#!         run: echo ${{ steps.var_test.outputs.A1 }}
+#!       - name: get_output_A2
+#!         run: echo ${{ steps.var_test.outputs.A2 }}
 
 
-      - id: set-foo
-        run: echo "::set-output name=foo::bar"
-      - run: echo ${{ steps.set-foo.outputs.foo }}        
+#!       - id: set-foo
+#!         run: echo "::set-output name=foo::bar"
+#!       - run: echo ${{ steps.set-foo.outputs.foo }}        
