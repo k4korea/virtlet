@@ -51,8 +51,7 @@ jobs:
           DOCKER_USER: "love7310"  #"love7310@naver.com"
           DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
           DOCKER_PASSWORD: "rlawnsdud#08"
-        run: >-          
-          docker build . --file Dockerfile --tag virtlet:${{ env.TAG_VERSION }} 
+        run: docker build . --file Dockerfile --tag virtlet:${{ env.TAG_VERSION }} 
 
 
 #          #! DOCKER_USER: ${{ secrets.DOCKER_USER }}
