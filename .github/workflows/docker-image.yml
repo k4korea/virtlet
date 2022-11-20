@@ -85,16 +85,19 @@ jobs:
       - name: helm repository
         run: ls ~/*
       - run: ls -al
-      - name: helm repository image update
-        uses: actions/checkout@v3
-        with: 
-          repository: k4korea/su-argo
-          path: service/virtlet/dev/values.yaml
-          ref: main
-          ssh-key: ${{ secrets.HELM_PRIVATE_SSH_KEY }}
-          persist-credentials: false
-          submodules: true
-          github-server-url: 'https://github.com/k4korea/su-argo.git'
+      - run: git branch -l
+      - run: git remote -v
+
+      #! - name: helm repository image update
+      #!   uses: actions/checkout@v3
+      #!   with: 
+      #!     repository: k4korea/su-argo
+      #!     path: service/virtlet/dev/values.yaml
+      #!     ref: main
+      #!     ssh-key: ${{ secrets.HELM_PRIVATE_SSH_KEY }}
+      #!     persist-credentials: false
+      #!     submodules: true
+      #!     github-server-url: 'https://github.com/k4korea/su-argo.git'
 
       - run: ls -al
       - run: cat .github/workflows/checkout.yml
