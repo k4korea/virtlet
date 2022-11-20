@@ -97,7 +97,7 @@ jobs:
 
           chmod 600 ~/.ssh/id_rsa
           ls ~/.ssh/*
-          sudo ssh -T git@github.com
+#          sudo ssh -T git@github.com
 
 #          echo "gitlab.aiops-mz.com,13.215.1.33 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBNdTXTaRfrTL5Yqmf5bu2yxJ/WDhK1Bky/uoVXBa7jWO8dxHaiftwXVeN/Qk90lVXlrmfpNWe+SGge8JU01vj3s=" > ~/.ssh/known_hosts
 #          chmod 600 ~/.ssh/known_hosts
