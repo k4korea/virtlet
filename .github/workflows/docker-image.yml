@@ -87,9 +87,9 @@ jobs:
       - name: helm repository image update
         uses: actions/checkout@v3
         with: 
-          repository: k4korea/su-argo.git
+          repository: k4korea/su-argo
           path: ./service/virtlet/dev/values.yaml
-          ref: 'main'
+          ref: /head/main
         
       - name: helm repository
         run: ls
