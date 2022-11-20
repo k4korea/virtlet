@@ -122,7 +122,7 @@ jobs:
 
       - run: |
          ls -al service/virtlet/dev/*
-         cd ./service/virtlet/dev/
+         
          ls -al
          cat ./service/virtlet/dev/values.yaml
         
