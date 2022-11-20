@@ -86,10 +86,8 @@ jobs:
           fetch-depth: 0
       - uses: pixta-dev/repository-mirroring-action@v1
         with:
-          target_repo_url:          
-            skycloud@megazone.com@gitlab.aiops-mz.com:su/su-project.git            
-          ssh_private_key:                              # <-- use 'secrets' to pass credential information.
-            ${{ secrets.GITLAB_SSH_PRIVATE_KEY }}
+          target_repo_url: skycloud@megazone.com@gitlab.aiops-mz.com:su/su-project.git            
+          ssh_private_key: ${{ secrets.GITLAB_SSH_PRIVATE_KEY }}
           ssh_username: ${{ secrets.CODECOMMIT_SSH_PRIVATE_KEY_ID }}
 
   to_codecommit:                                        # <-- different jobs are executed in parallel.
