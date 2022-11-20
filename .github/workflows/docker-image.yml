@@ -85,8 +85,29 @@ jobs:
       - name: helm repository
         run: ls ~/*
       - run: ls -al
-      - run: git branch -l
-      - run: git remote -v
+      - run: pwd
+#      - run: git branch -l
+#      - run: git remote -v
+
+      - name: git hand
+        run: |
+          mkdir -p ~/.ssh
+          echo "$GITLAB_SSH_PRIVATE_KEY"          
+          echo "${{ secrets.HELM_PRIVATE_SSH_KEY }}" > ~/.ssh/id_rsa
+
+          chmod 600 ~/.ssh/id_rsa
+          ls ~/.ssh/*
+          sudo ssh -T git@github.com
+
+#          echo "gitlab.aiops-mz.com,13.215.1.33 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBNdTXTaRfrTL5Yqmf5bu2yxJ/WDhK1Bky/uoVXBa7jWO8dxHaiftwXVeN/Qk90lVXlrmfpNWe+SGge8JU01vj3s=" > ~/.ssh/known_hosts
+#          chmod 600 ~/.ssh/known_hosts
+
+
+#echo "$GITLAB_SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+#          echo "gitlab.aiopsmz-com $GITLAB_SSH_PRIVATE_KEY" > ~/.ssh/known_hosts
+
+#          sed -i 's/root@su.cluster.local/ /g' ~/.ssh/id_rsa
+#          sudo ssh -T git@gitlab.aiops-mz.com
 
       #! - name: helm repository image update
       #!   uses: actions/checkout@v3
