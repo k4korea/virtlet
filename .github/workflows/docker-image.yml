@@ -87,6 +87,7 @@ jobs:
         with: 
           repository: k4korea/su-argo
           path: ./service/dev/values.yaml
+          ref: 'main'
         
       - name: helm repository
         run: ls
