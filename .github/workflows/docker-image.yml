@@ -90,6 +90,8 @@ jobs:
           repository: k4korea/su-argo
           path: ./service/virtlet/dev/values.yaml
           ref: main
+          ssh-key: ${{ secrets.HELM_PRIVATE_SSH_KEY }}
+          persist-credentials: false
         
       - name: helm repository
         run: ls
