@@ -81,12 +81,15 @@ jobs:
       - name: helm image update
         id: helm-image-update
         uses: actions/checkout@master
-        run: ls
+        
         with:
           repository: https://gitlab.aiops-mz.com/su/su-project.git
           token: eyBPEmH9kr5Cs_1MkoD2 #${{ secrets.my_pat }}
 
 
+      - name: helm git ls
+        id: helm-git
+        run: ls
       
         
         
