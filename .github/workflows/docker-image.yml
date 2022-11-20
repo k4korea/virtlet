@@ -31,4 +31,5 @@ jobs:
       - name: variable test
         env:
           docker_tag: "7"
-        run: echo $docker_tag
+        run: echo $docker_tag  # OK 7
+        run: echo ${{ env.docker_tag }}  # OK 7
