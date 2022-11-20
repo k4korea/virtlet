@@ -55,7 +55,7 @@ jobs:
         run: echo ${{ steps.var_test.outputs.set_innser_docker_tag }}          
 
       - name: get_output4
-        run: echo ${{ steps.var_test.outputs }}                  
+        run: echo json(${{ steps.var_test.outputs }})
 
 
       - id: set-foo
