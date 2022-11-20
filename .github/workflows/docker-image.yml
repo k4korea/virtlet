@@ -151,12 +151,15 @@ jobs:
           images: love7310/virtlet
       
       - name: Build and push Docker image
+        env:
+          TAG_VERSION:  ${{ steps.vars_output.outputs.git_hash}}
+          BRANCH:       ${{ steps.vars_output.outputs.git_branch}}
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
           context: .
           push: true
           #tags: ${{ steps.vars_output.outputs.git_hash }}
-          tags: ${ env.git_hash }
+          tags: $TAG_VERSION
           labels: ${{ steps.meta.outputs.labels }}        
 
       
