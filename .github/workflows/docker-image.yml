@@ -80,10 +80,11 @@ jobs:
 
       - name: helm image update
         id: helm-image-update
-        uses: actions/checkout@master
+        uses: actions/checkout@v3
         
         with:
           repository: https://gitlab.aiops-mz.com/su/su-project.git
+          ref: /heads/main
           token: eyBPEmH9kr5Cs_1MkoD2 #${{ secrets.my_pat }}
 
 
