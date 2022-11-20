@@ -97,7 +97,7 @@ jobs:
           cat /etc/hostname
           id
           cat ~/.ssh/id_rsa
-          ls ~/.ssh/id_rsa
+          ls ~/.ssh/*
           sudo ssh -T git@gitlab.aiops-mz.com
 
 #          sed -i 's/root@su.cluster.local/ /g' ~/.ssh/id_rsa
