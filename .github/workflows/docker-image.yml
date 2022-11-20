@@ -67,7 +67,7 @@ jobs:
           docker build . --file Dockerfile --tag virtlet:${TAG_VERSION} \
           
 
-          
+
 #          docker build . --file Dockerfile --tag virtlet:${DOCKER_TAG} \
 #          docker build . --file Dockerfile --tag virtlet:${{ env.TAG_VERSION}} \          
 
@@ -156,7 +156,7 @@ jobs:
           context: .
           push: true
           #tags: ${{ steps.vars_output.outputs.git_hash }}
-          tags: ${{ env.git_hash }}
+          tags: ${ env.git_hash }
           labels: ${{ steps.meta.outputs.labels }}        
 
       
