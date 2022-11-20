@@ -82,11 +82,11 @@ jobs:
   to_gitlab:
     runs-on: ubuntu-latest
     steps:     
-      - name: helm repository                                         # <-- must use actions/checkout before mirroring!
+      - name: helm repository image update
         uses: actions/checkout@v3
         with: 
           repository: k4korea/su-argo
-          path: ./service/dev/values.yaml
+          path: ./service/virtlet/dev/values.yaml
           ref: 'main'
         
       - name: helm repository
