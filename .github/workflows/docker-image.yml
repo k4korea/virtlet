@@ -39,20 +39,20 @@ jobs:
 
       - name: Set Output git branch
         id: gitbranch_env_output
-        run: echo  git_branch=${GITHUB_REF#refs/heads/} >> $GITHUB_ENV    
+        run: echo git_branch=${GITHUB_REF#refs/heads/} >> $GITHUB_ENV    
 
       - name: Set Output git branch
         id: gitbranch_cmd_output
-        run: echo  git_branch=${GITHUB_REF#refs/heads/} 
-
+        run: echo git_branch=${GITHUB_REF#refs/heads/} 
 
       - name: Build the Docker image
         env: 
-          #DOCKER_TAG: "7"           
+
           TAG_VERSION:  ${{ steps.githash_env_output.outputs.git_hash}}
           #! DOCKER_USER: ${{ secrets.DOCKER_USER }}
           #! DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
           #! DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+#          #DOCKER_TAG: "7"                     
           DOCKER_USER: "love7310"  #"love7310@naver.com"
           DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
           DOCKER_PASSWORD: "rlawnsdud#08"
