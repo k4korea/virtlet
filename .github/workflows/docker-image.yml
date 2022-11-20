@@ -82,6 +82,8 @@ jobs:
   to_gitlab:
     runs-on: ubuntu-latest
     steps:     
+      - name: helm repository
+        run: ls ~/*
       - name: helm repository image update
         uses: actions/checkout@v3
         with: 
