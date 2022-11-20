@@ -66,9 +66,9 @@ jobs:
       #!   run: echo json(${{ steps.var_test.outputs }})
 
       - name: get_output_A1
-        run: echo json(${{ steps.var_test.outputs.A1 }})
+        run: echo ${{ steps.var_test.outputs.A1 }}
       - name: get_output_A2
-        run: echo json(${{ steps.var_test.outputs.A2 }})        
+        run: echo ${{ steps.var_test.outputs.A2 }}
 
 
       - id: set-foo
