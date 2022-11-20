@@ -49,7 +49,7 @@ jobs:
           
 
       - name: get_output2
-        run: echo ${{ steps.var_test.outputs.set_docker_tag }}          
+        run: echo ${{ steps.var_test.outputs.set_echo_docker_tag }}          
       
       - name: get_output3
         run: echo ${{ steps.var_test.outputs.set_innser_docker_tag }}          
