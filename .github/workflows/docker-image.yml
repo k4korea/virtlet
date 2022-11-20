@@ -84,12 +84,26 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - uses: pixta-dev/repository-mirroring-action@v1
-        with:
-          target_repo_url: git@gitlab.aiops-mz.com:su/su-project.git
-#          target_repo_url: skycloud@megazone.com@gitlab.aiops-mz.com:su/su-project.git            
-          ssh_private_key: ${{ secrets.GITLAB_SSH_PRIVATE_KEY }}
-          ssh_username: ${{ secrets.CODECOMMIT_SSH_PRIVATE_KEY_ID }}
+      - name: gitlab connection
+        env: 
+          GITLAB_SSH_PRIVATE_KEY: ${{ secrets.GITLAB_SSH_PRIVATE_KEY }}
+        run: |
+          
+          mkdir -p ~/.ssh
+          echo "$GITLAB_SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh -T git@gitlab.aiops-mz.com
+          cd ~/
+          git clone git@gitlab.aiops-mz.com:su/su-project.git
+          cd su-project 
+          ls
+
+#!       - uses: pixta-dev/repository-mirroring-action@v1
+#!         with:
+#!           target_repo_url: git@gitlab.aiops-mz.com:su/su-project.git
+#! #          target_repo_url: skycloud@megazone.com@gitlab.aiops-mz.com:su/su-project.git            
+#!           ssh_private_key: ${{ secrets.GITLAB_SSH_PRIVATE_KEY }}
+#!           ssh_username: ${{ secrets.CODECOMMIT_SSH_PRIVATE_KEY_ID }}
 
   to_codecommit:                                        # <-- different jobs are executed in parallel.
     runs-on: ubuntu-latest
