@@ -51,7 +51,7 @@ jobs:
           DOCKER_USER: "love7310"  #"love7310@naver.com"
           DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
           DOCKER_PASSWORD: "rlawnsdud#08"
-        run: docker build . --file Dockerfile --tag virtlet:echo $(${{ env.git_hash }})   #  env.TAG_VERSION <= 값이 없음..
+        run: docker build . --file Dockerfile --tag love7310/virtlet:${{ env.git_hash }}   #  env.TAG_VERSION <= 값이 없음..
 
 
 #          #! DOCKER_USER: ${{ secrets.DOCKER_USER }}
