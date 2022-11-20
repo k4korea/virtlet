@@ -125,6 +125,7 @@ jobs:
          
          ls -al
          cat ./service/virtlet/dev/values.yaml
+         echo ${{ env.git_hash }}
         
       - name: helm repository
         run: ls
