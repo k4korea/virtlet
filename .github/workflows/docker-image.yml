@@ -81,15 +81,15 @@ jobs:
 
   to_gitlab:
     runs-on: ubuntu-latest
-      steps:     
-        - name: helm repository                                         # <-- must use actions/checkout before mirroring!
-          uses: actions/checkout@v3
-           with: 
-            repository: k4korea/su-argo
-            path: ./service/dev/values.yaml
+    steps:     
+      - name: helm repository                                         # <-- must use actions/checkout before mirroring!
+        uses: actions/checkout@v3
+         with: 
+          repository: k4korea/su-argo
+          path: ./service/dev/values.yaml
         
-        - name: helm repository
-          run: ls
+      - name: helm repository
+        run: ls
 
 
 
