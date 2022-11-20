@@ -33,17 +33,17 @@ jobs:
         id: githash_env_output
         run: echo git_hash=$(git rev-parse --short "$GITHUB_SHA") >> $GITHUB_ENV
 
-      #! - name: Set Output git hash2
-      #!   id: githash_cmd_output
-      #!   run: echo git_hash=$(git rev-parse --short "$GITHUB_SHA")
+      - name: Set Output git hash2
+        id: githash_cmd_output
+        run: echo git_hash=$(git rev-parse --short "$GITHUB_SHA")
 
-      #! - name: Set Output git branch
-      #!   id: gitbranch_env_output
-      #!   run: echo git_branch=${GITHUB_REF#refs/heads/} >> $GITHUB_ENV    
+      - name: Set Output git branch
+        id: gitbranch_env_output
+        run: echo git_branch=${GITHUB_REF#refs/heads/} >> $GITHUB_ENV    
 
-      #! - name: Set Output git branch
-      #!   id: gitbranch_cmd_output
-      #!   run: echo git_branch=${GITHUB_REF#refs/heads/} 
+      - name: Set Output git branch
+        id: gitbranch_cmd_output
+        run: echo git_branch=${GITHUB_REF#refs/heads/} 
 
       #! - name: Build the Docker image
       #!   env: 
