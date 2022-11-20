@@ -76,18 +76,22 @@ jobs:
         uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
         with:
           images: love7310/virtlet
+
+        - name: Docker push
+         id: docker push
+         run: docker push love7310/virtlet:${{ env.git_hash }}
       
-      - name: Build and push Docker image
-        env:
-          TAG_VERSION:  ${{ steps.githash_cmd_output.outputs.git_hash}}
-          BRANCH:       ${{ steps.vars_output.outputs.git_branch}}
-        uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
-        with:
-          context: .
-          push: true
-          #tags: ${{ steps.vars_output.outputs.git_hash }}
-          tags: 7  #${{ env.git_hash }} #${{ steps.githash_cmd_output.outputs.git_hash}}  #${{ env.TAG_VERSION }}
-          labels: ${{ steps.meta.outputs.labels }}        
+      #! - name: Build and push Docker image
+      #!   env:
+      #!     TAG_VERSION:  ${{ steps.githash_cmd_output.outputs.git_hash}}
+      #!     BRANCH:       ${{ steps.vars_output.outputs.git_branch}}
+      #!   uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
+      #!   with:
+      #!     context: .
+      #!     push: true
+      #!     #tags: ${{ steps.vars_output.outputs.git_hash }}
+      #!     tags: 7  #${{ env.git_hash }} #${{ steps.githash_cmd_output.outputs.git_hash}}  #${{ env.TAG_VERSION }}
+      #!     labels: ${{ steps.meta.outputs.labels }}        
 
 
 
