@@ -47,7 +47,7 @@ jobs:
 
       - name: Build the Docker image
         env: 
-          TAG_VERSION:  ${{ steps.githash_env_output.outputs.git_hash}}
+          TAG_VERSION: ${{ steps.githash_cmd_output.outputs.git_hash}}
           DOCKER_USER: "love7310"  #"love7310@naver.com"
           DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
           DOCKER_PASSWORD: "rlawnsdud#08"
