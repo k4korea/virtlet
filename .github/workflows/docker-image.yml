@@ -158,8 +158,8 @@ jobs:
         with:
           context: .
           push: true
-          #tags: ${{ steps.vars_output.outputs.git_hash }}
-          tags: $TAG_VERSION
+          tags: ${{ steps.vars_output.outputs.git_hash }}
+          #tags: $TAG_VERSION
           labels: ${{ steps.meta.outputs.labels }}        
 
       
