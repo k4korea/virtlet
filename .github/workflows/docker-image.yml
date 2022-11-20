@@ -32,7 +32,7 @@ jobs:
         id : var_test
         env:
           docker_tag: "7"
-        run: >-
+        run: |
           echo "::set-output name=set_innser_docker_tag::inner-data" \
           echo "::set-output name=set_echo_docker_tag::$(echo ${docker_tag})" \
 
