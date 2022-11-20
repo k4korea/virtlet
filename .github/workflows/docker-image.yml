@@ -33,8 +33,17 @@ jobs:
         env:
           docker_tag: "7"
         run: |
+
+          A1 = 100
+          A2 = 200
+
           echo "::set-output name=set_innser_docker_tag::inner-data" \
           echo "::set-output name=set_echo_docker_tag::$(echo ${docker_tag})" \
+
+          echo "::set-output name=A1::$(echo ${A1})" 
+          echo "::set-output name=A2::$(echo ${A2})" 
+
+
 
 
 #          echo ${{ env.docker_tag }}  # FAIL 7
@@ -58,6 +67,11 @@ jobs:
 
       - name: get_output4
         run: echo json(${{ steps.var_test.outputs }})
+
+      - name: get_output_A1
+        run: echo json(${{ steps.var_test.outputs.A1 }})
+      - name: get_output_A2
+        run: echo json(${{ steps.var_test.outputs.A2 }})        
 
 
       - id: set-foo
