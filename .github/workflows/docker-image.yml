@@ -36,8 +36,15 @@ jobs:
 
           echo ${{ env.docker_tag }}  # FAIL 7
           echo "::set-output name=set_docker_tag::${docker_tag}"
+          echo "::set-output name=set_echo_docker_tag::$(echo ${docker_tag})"
 #          ## env 에다 변수를 넣어야 하나.
 #          echo $docker_tag  # OK 7          
         
       - name: get_output
-        run: echo ${{ steps.var_test.outputs.set_docker_tag }}
+        run: >-
+          echo ${{ steps.var_test.outputs.set_docker_tag }}
+          echo ${{ steps.var_test.outputs.set_echo_docker_tag }}
+
+      - id: set-foo
+        run: echo "::set-output name=foo::bar"
+      - run: echo ${{ steps.set-foo.outputs.foo }}        
