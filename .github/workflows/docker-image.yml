@@ -2,9 +2,10 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "master", "dev" ]
+
   pull_request:
-    branches: [ "master" ]
+    branches: [ "master", "dev" ]
     
 
 jobs:
@@ -109,6 +110,7 @@ jobs:
 #          sed -i 's/root@su.cluster.local/ /g' ~/.ssh/id_rsa
 #          sudo ssh -T git@gitlab.aiops-mz.com
 
+
       - name: helm repository image update
         uses: actions/checkout@v3
         with: 
@@ -127,11 +129,9 @@ jobs:
          cat ./service/virtlet/dev/values.yaml
          echo ${{ env.git_hash }}
         
-      - name: helm repository
-        run: ls
+      
 
-
-
+#  tag: "90faee8"  # 4-> 3x -> 2 x
 
 
   
