@@ -19,7 +19,7 @@ app.get('/',function(req,res){
 });
 
 app.get('/imgs',function(req,res){
-    fs.readFile('VIRTLET4.jpg', function(error, data){
+    fs.readFile('virtlet4.jpg', function(error, data){
       res.writeHead(200, {'Content-Type': 'text/html'})  ;
       res.end(data);
     });
