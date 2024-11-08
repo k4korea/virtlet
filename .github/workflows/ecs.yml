@@ -92,44 +92,44 @@ jobs:
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
         echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
         
-    #! - name: Define ECS Task Definition
-    #!     id: task-def
-    #!     run: |
-    #!       cat <<EOF > taskdef.json
-    #!       {
-    #!         "containerDefinitions": [
-    #!           {
-    #!             "name": "virtlet",
-    #!             "image": "211125752707.dkr.ecr.us-east-1.amazonaws.com/virtlet:${IMAGE_TAG}",
-    #!             "essential": true,
-    #!             "logConfiguration": {
-    #!               "logDriver": "awslogs",
-    #!               "options": {
-    #!                 "awslogs-group": "/ecs/virtlet-sample-app",
-    #!                 "awslogs-region": ${{ env.AWS_REGION }},
-    #!                 "awslogs-stream-prefix": "ecs"
-    #!               }
-    #!             },
-    #!             "portMappings": [
-    #!               {
-    #!                 "containerPort": 80,
-    #!                 "hostPort": 80,
-    #!                 "protocol": "tcp"
-    #!               }
-    #!             ]
-    #!           }
-    #!         ],
-    #!         "cpu": "256",
-    #!         "executionRoleArn": "arn:aws:iam::211125752707:role/ecsTaskExecutionRole",
-    #!         "family": "ec2-task-definition",
-    #!         "memory": "512",
-    #!         "networkMode": "bridge",
-    #!         "requiresCompatibilities": [
-    #!           "EC2"
-    #!         ]
-    #!       }
-    #!       EOF
-    #!       echo taskdef.json
+    - name: Define ECS Task Definition
+        id: task-def
+        run: |
+          cat <<EOF > taskdef.json
+          {
+            "containerDefinitions": [
+              {
+                "name": "virtlet",
+                "image": "211125752707.dkr.ecr.us-east-1.amazonaws.com/virtlet:${IMAGE_TAG}",
+                "essential": true,
+                "logConfiguration": {
+                  "logDriver": "awslogs",
+                  "options": {
+                    "awslogs-group": "/ecs/virtlet-sample-app",
+                    "awslogs-region": ${{ env.AWS_REGION }},
+                    "awslogs-stream-prefix": "ecs"
+                  }
+                },
+                "portMappings": [
+                  {
+                    "containerPort": 80,
+                    "hostPort": 80,
+                    "protocol": "tcp"
+                  }
+                ]
+              }
+            ],
+            "cpu": "256",
+            "executionRoleArn": "arn:aws:iam::211125752707:role/ecsTaskExecutionRole",
+            "family": "ec2-task-definition",
+            "memory": "512",
+            "networkMode": "bridge",
+            "requiresCompatibilities": [
+              "EC2"
+            ]
+          }
+          EOF
+          # echo taskdef.json
 
     - name: Fill in the new image ID in the Amazon ECS task definition
       id: task-def
