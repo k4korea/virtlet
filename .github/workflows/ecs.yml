@@ -54,7 +54,6 @@ jobs:
     env: 
       AWS_REGION: us-east-1 
 
-
     steps:
     - name: Checkout
       uses: actions/checkout@v4
