@@ -78,6 +78,10 @@ jobs:
         # Build a docker container and
         # push it to ECR so that it can
         # be deployed to ECS.
+        DATE_TAG=$(date +'%Y%m%d-%H%M%S')
+        SHORT_SHA=${GITHUB_SHA::6}
+        echo "IMAGE_TAG=${DATE_TAG}-${SHORT_SHA}" >> $GITHUB_ENV
+          
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
         echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
