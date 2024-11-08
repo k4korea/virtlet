@@ -106,8 +106,8 @@ jobs:
                 "logConfiguration": {
                   "logDriver": "awslogs",
                   "options": {
-                    "awslogs-group": "/ecs/virtlet-sample-app",
-                    "awslogs-region": ${env.AWS_REGION},
+                    "awslogs-group":  "/ecs/virtlet-sample-app",
+                    "awslogs-region": "${env.AWS_REGION}",
                     "awslogs-stream-prefix": "ecs"
                   }
                 },
