@@ -129,7 +129,7 @@ jobs:
             ]
           }
           EOF
-          cat taskdef.json
+          echo taskdef.json
 
     - name: Fill in the new image ID in the Amazon ECS task definition
       id: task-def
