@@ -106,7 +106,7 @@ jobs:
                   "logDriver": "awslogs",
                   "options": {
                     "awslogs-group": "/ecs/virtlet-sample-app",
-                    "awslogs-region": "us-east-1",
+                    "awslogs-region": ${{ env.AWS_REGION }},
                     "awslogs-stream-prefix": "ecs"
                   }
                 },
@@ -129,6 +129,7 @@ jobs:
             ]
           }
           EOF
+          cat taskdef.json
 
     - name: Fill in the new image ID in the Amazon ECS task definition
       id: task-def
