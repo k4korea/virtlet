@@ -9,7 +9,7 @@
           "-c"
         ],
         "essential": true,
-        "image": "httpd:2.4",
+        "image": "211125752707.dkr.ecr.us-east-1.amazonaws.com/virtlet:cab2e7597291d048767605ff2f8e1c2803261a26",
         "logConfiguration": {
           "logDriver": "awslogs",
           "options": {
