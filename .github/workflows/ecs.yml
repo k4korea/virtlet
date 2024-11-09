@@ -51,13 +51,13 @@ jobs:
     name: Deploy
     runs-on: ubuntu-latest
     environment: production
-    env: 
-      AWS_REGION: us-east-1
-      ECR_REPOSITORY: "virtlet"
-      ECS_SERVICE: "virtlet"
-      ECS_CLUSTER: "prod-advanced-211125752707"
-      ECS_TASK_DEFINITION: "./ecs/task-definition.json"
-      CONTAINER_NAME: "virtlet"
+    #! env: 
+    #!   AWS_REGION: us-east-1
+    #!   ECR_REPOSITORY: "virtlet"
+    #!   ECS_SERVICE: "virtlet"
+    #!   ECS_CLUSTER: "prod-advanced-211125752707"
+    #!   ECS_TASK_DEFINITION: "./ecs/task-definition.json"
+    #!   CONTAINER_NAME: "virtlet"
 
     steps:
     - name: Checkout
