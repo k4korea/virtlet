@@ -124,13 +124,13 @@ jobs:
         }
         EOF
         cat taskdef.json
-    - name: Fill in the new image ID in the Amazon ECS task definition
+    #! - name: Fill in the new image ID in the Amazon ECS task definition
       
-      uses: aws-actions/amazon-ecs-render-task-definition@v1
-      with:
-        task-definition:  taskdef.json
-        container-name:   ${{ env.CONTAINER_NAME }}
-        image:            ${{ steps.build-image.outputs.image }}
+    #!   uses: aws-actions/amazon-ecs-render-task-definition@v1
+    #!   with:
+    #!     task-definition:  taskdef.json
+    #!     container-name:   ${{ env.CONTAINER_NAME }}
+    #!     image:            ${{ steps.build-image.outputs.image }}
 
     - name: Deploy Amazon ECS task definition
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
