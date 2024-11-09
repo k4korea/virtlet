@@ -40,7 +40,7 @@ env:
   ECS_TASK_DEFINITION: "./ecs/task-definition.json" # set this to the path to your Amazon ECS task definition
                                                     # file, e.g. .aws/task-definition.json
                                                # file, e.g. .aws/task-definition.json
-  CONTAINER_NAME: "virtlet-auto"           # set this to the name of the container in the
+  CONTAINER_NAME: "virtlet"           # set this to the name of the container in the
                                                # containerDefinitions section of your task definition
   AWS_ACCOUNT:    "211125752707"
 permissions:
