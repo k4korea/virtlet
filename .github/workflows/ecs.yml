@@ -41,7 +41,6 @@ env:
                                                     # file, e.g. .aws/task-definition.json
                                                   # file, e.g. .aws/task-definition.json
   CONTAINER_NAME: "virtlet"                       # set this to the name of the container in the
-                                               
   AWS_ACCOUNT:    "211125752707"
 permissions:
   contents: read
@@ -128,7 +127,7 @@ jobs:
     
 
     - name: Fill in the new image ID in the Amazon ECS task definition
-      
+      id: task-def
       uses: aws-actions/amazon-ecs-render-task-definition@v1
       with:
         task-definition:  ./taskdef.json
