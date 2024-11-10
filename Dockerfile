@@ -1,5 +1,5 @@
-#FROM node:7-onbuild
-FROM node:current
+FROM node:7-onbuild
+#FROM node:current
 
 WORKDIR /usr/src/app
 # set a health check
