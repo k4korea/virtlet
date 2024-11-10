@@ -134,6 +134,18 @@ jobs:
         container-name:   ${{ env.CONTAINER_NAME }}
         image:            ${{ steps.build-image.outputs.image }}
 
+    - name: Check and Create ECS Service if missing
+      run: |
+        # 서비스 존재 여부 확인
+        SERVICE_EXISTS=$(aws ecs describe-services --cluster ${{ env.ECS_CLUSTER }} --services ${{ env.ECS_SERVICE }} --query 'services[0].serviceName' --output text)
+        
+        if [ "$SERVICE_EXISTS" == "None" ]; then
+          echo "Service does not exist. Creating service..."
+          aws ecs create-service --cluster ${{ env.ECS_CLUSTER }} --service-name ${{ env.ECS_SERVICE }} --task-definition ${{ steps.task-def.outputs.task-definition }} --desired-count 1 --launch-type EC2
+        else
+          echo "Service already exists."
+        fi
+
     #! - name: Deploy to ECS
     #!   env:
     #!     AWS_REGION: ${{ env.AWS_REGION }}
@@ -151,17 +163,7 @@ jobs:
 
         wait-for-service-stability: true
     
-    - name: Check and Create ECS Service if missing
-      run: |
-        # 서비스 존재 여부 확인
-        SERVICE_EXISTS=$(aws ecs describe-services --cluster ${{ env.ECS_CLUSTER }} --services ${{ env.ECS_SERVICE }} --query 'services[0].serviceName' --output text)
-        
-        if [ "$SERVICE_EXISTS" == "None" ]; then
-          echo "Service does not exist. Creating service..."
-          aws ecs create-service --cluster ${{ env.ECS_CLUSTER }} --service-name ${{ env.ECS_SERVICE }} --task-definition ${{ steps.task-def.outputs.task-definition }} --desired-count 1 --launch-type EC2
-        else
-          echo "Service already exists."
-        fi
+    
 
     #! - name: Deploy Amazon ECS task definition
     #!   uses: aws-actions/amazon-ecs-deploy-task-definition@v2
