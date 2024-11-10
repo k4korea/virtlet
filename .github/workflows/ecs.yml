@@ -141,7 +141,8 @@ jobs:
         
         if [ "$SERVICE_EXISTS" == "None" ]; then
           echo "Service does not exist. Creating service..."
-          aws ecs create-service --cluster ${{ env.ECS_CLUSTER }} --service-name ${{ env.ECS_SERVICE }} --task-definition ${{ steps.task-def.outputs.task-definition }} --desired-count 1 --launch-type EC2
+          echo "aws ecs create-service --cluster ${{ env.ECS_CLUSTER }} --service-name ${{ env.ECS_SERVICE }} --task-definition ${{ steps.task-def.outputs.task-definition }} --desired-count 1 --launch-type EC2"
+          #aws ecs create-service --cluster ${{ env.ECS_CLUSTER }} --service-name ${{ env.ECS_SERVICE }} --task-definition ${{ steps.task-def.outputs.task-definition }} --desired-count 1 --launch-type EC2
         else
           echo "Service already exists."
         fi
