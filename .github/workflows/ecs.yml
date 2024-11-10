@@ -128,6 +128,8 @@ jobs:
         EOF
         cat taskdef.json
         ls -alh
+        echo "\n\n\n"
+        ls -alh /home/runner/work/_temp/
 
     
 
