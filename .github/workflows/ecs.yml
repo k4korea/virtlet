@@ -135,13 +135,20 @@ jobs:
         container-name:   ${{ env.CONTAINER_NAME }}
         image:            ${{ steps.build-image.outputs.image }}
 
+    - name: Deploy to ECS
+        env:
+          AWS_REGION: ${{ env.AWS_REGION }}
+        run: |
+          aws ecs register-task-definition --cli-input-json file://taskdef.json
+          aws ecs update-service --cluster YOUR_CLUSTER_NAME --service ${{ env.ECS_SERVICE }} --force-new-deployment
+
     - name: Deploy Amazon ECS task definition
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
       with:
         task-definition:  ${{ steps.task-def.outputs.task-definition }}
         service:          ${{ env.ECS_SERVICE }}
         cluster:          ${{ env.ECS_CLUSTER }}
-        
+
         wait-for-service-stability: true
 
     #! - name: Deploy Amazon ECS task definition
