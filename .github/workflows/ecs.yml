@@ -109,6 +109,10 @@ jobs:
                   "hostPort": 80,
                   "protocol": "tcp"
                 }
+              ],
+              "command": [
+                "node",
+                "index.js"
               ]
             }
           ],
@@ -124,7 +128,7 @@ jobs:
         EOF
         cat taskdef.json
         ls -alh
-        
+
     
 
     - name: Fill in the new image ID in the Amazon ECS task definition

@@ -22,5 +22,9 @@ aws ecs register-task-definition \
           "hostPort": 80,
           "protocol": "tcp"
         }
+      ],
+      "command": [
+        "node",
+        "index.js"
       ]
     }]'
