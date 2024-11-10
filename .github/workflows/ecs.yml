@@ -123,7 +123,8 @@ jobs:
         }
         EOF
         cat taskdef.json
-        #ls -alh
+        ls -alh
+        
     
 
     - name: Fill in the new image ID in the Amazon ECS task definition
