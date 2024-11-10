@@ -145,11 +145,13 @@ jobs:
       run: |
         # 서비스 존재 여부 확인
         SERVICE_EXISTS=$(aws ecs describe-services --cluster ${{ env.ECS_CLUSTER }} --services ${{ env.ECS_SERVICE }} --query 'services[0].serviceName' --output text)
-        
+        ls -alh
         if [ "$SERVICE_EXISTS" == "None" ]; then
           echo "Service does not exist. Creating service..."
           echo "aws ecs create-service --cluster ${{ env.ECS_CLUSTER }} --service-name ${{ env.ECS_SERVICE }} --task-definition ./taskdef.json --desired-count 1 --launch-type EC2"
-          aws ecs create-service --cluster ${{ env.ECS_CLUSTER }} --service-name ${{ env.ECS_SERVICE }} --task-definition ${{ steps.task-def.outputs.task-definition }} --desired-count 1 --launch-type EC2
+          #aws ecs create-service --cluster ${{ env.ECS_CLUSTER }} --service-name ${{ env.ECS_SERVICE }} --task-definition ${{ steps.task-def.outputs.task-definition }} --desired-count 1 --launch-type EC2
+          aws ecs create-service --cluster ${{ env.ECS_CLUSTER }} --service-name ${{ env.ECS_SERVICE }} --task-definition virtlet-def:3 --desired-count 1 --launch-type EC2
+          
         else
           echo "Service already exists."
         fi
