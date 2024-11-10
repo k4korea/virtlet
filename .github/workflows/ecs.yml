@@ -126,10 +126,10 @@ jobs:
           ]
         }
         EOF
-        cat taskdef.json
-        ls -alh
-        echo "\n\n\n"
-        ls -alh /home/runner/work/_temp/
+        #! cat taskdef.json
+        #! ls -alh
+        #! echo "\n\n\n"
+        #! ls -alh /home/runner/work/_temp/
 
     
 
@@ -155,6 +155,9 @@ jobs:
         else
           echo "Service already exists."
         fi
+
+        echo "$AWS_ACCESS_KEY_ID"
+
 
     #! - name: Deploy to ECS
     #!   env:
